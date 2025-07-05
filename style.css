@@ -1,0 +1,86 @@
+/* Body Background */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #00c6ff, #0072ff); /* Gradient background */
+}
+
+/* Glassy Login Container */
+.login-container {
+    width: 350px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.08); /* Semi-transparent */
+    backdrop-filter: blur(12px); /* Frosted blur effect */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3); /* Depth */
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Glass border */
+    color: #fff;
+}
+
+/* Heading */
+.login-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Input Fields */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    backdrop-filter: blur(4px);
+}
+
+/* Placeholder Text */
+.login-container input::placeholder {
+    color: #eee;
+}
+
+/* Remember Me and Forgot */
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+/* Login Button (Styled as <a> or use <button>) */
+.login-container a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: rgba(0, 123, 255, 0.5);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.login-container a:hover {
+    background-color: rgba(0, 123, 255, 0.8);
+}
+
+/* Register Link Styling */
+.login-container p a {
+    color: #00c6ff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login-container p a:hover {
+    text-decoration: underline;
+}

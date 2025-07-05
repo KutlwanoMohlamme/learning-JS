@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Login</title>
+    </head>
+    <body>
+    <div class="login-container">
+        <h1>Welcome. Please log in</h1>
+
+        <form>
+            <label for="usernameInput">Username:</label><input type="text" id="usernameInput"/><br/>
+            <label for="passwordInput">Password:</label><input type="password" id="passwordInput"/><br/>
+    <div class="remember-forgot">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember Me</label>
+        <a href="#">Forgot Password?</a>
+    </div>
+
+            <p id="message"></p>
+
+            <a href="#" onclick="verifyUser()">Log in</a>
+            <br/><br/>
+            <p>Don't have an account? <a href="#">Register</a></p>
+        </form>
+
+        <script>
+
+            function verifyUser(){
+                var username = document.getElementById("usernameInput").value;
+                var password = document.getElementById("passwordInput").value;
+                var rememberMe = document.getElementById("rememberMe").checked;
+
+                checkUserCreds(username, password, rememberMe);
+            }
+
+            function checkUserCreds(username, password){
+                var systemUsername = "Kutlwano";
+                var systemPassword = "310105";
+
+                if(username == systemUsername && password == systemPassword){
+                    document.getElementById("message").innerHTML = "correct. Logging you in...";
+                } else {
+                    document.getElementById("message").innerHTML ="Username or Password are incorrect";
+                }
+            }
+            window.onload = function(){
+                var savedUsername = localStorage.getItem("savedUsername");
+                if(savedUsername){
+                    document.getElementById("usernameInput").value = savedUsername;
+                    document.getElementById("rememberMe").checked = true;
+                }
+            }
+
+        </script>
+
+    </body>
+</html>

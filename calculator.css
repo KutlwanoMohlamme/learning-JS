@@ -1,0 +1,62 @@
+/* calculator styles
+table {
+    color: #fff;
+    text-align: center;
+    border-collapse: collapse;
+    font: normal 2.5em Arial, Helvetica, sans-serif;
+    width: 80%;
+    margin: auto;
+}
+
+tr {
+    height: 16vh;
+    background-color: #ff6633;
+}
+
+td {
+    width: 25vw;
+    border: 1px solid #ff6633;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#inputBox {
+    background-color: #663399;
+    text-align: right;
+    width: 100%;
+    font-size: 2em;
+    color: #fff;
+    border: none;
+    padding: 10px;
+}
+
+.digitButton {
+    background-color: #6600ff;
+    font-size: 1.2em;
+    padding: 15px;
+}
+
+.digitButton:hover {
+    background-color: #5500cc;
+}
+
+.operatorButton {
+    background-color: purple;
+    font-size: 1.2em;
+    padding: 15px;
+}
+
+.operatorButton:hover {
+    background-color: #6a1b9a;
+}
+
+.ACButton {
+    background-color: #00ffff;
+    font-size: 1.2em;
+    padding: 15px;
+}
+
+.ACButton:hover {
+    background-color: #00cccc;
+}

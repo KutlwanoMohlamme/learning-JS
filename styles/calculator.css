@@ -1,9 +1,13 @@
-/* calculator styles
+ body {
+    background-color: #222;
+    font-family: Arial, sans-serif;
+}
+
 table {
     color: #fff;
     text-align: center;
     border-collapse: collapse;
-    font: normal 2.5em Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
     width: 80%;
     margin: auto;
 }
@@ -28,7 +32,9 @@ td {
     font-size: 2em;
     color: #fff;
     border: none;
-    padding: 10px;
+    padding: 15px;
+    height: 60px;         /* Adds vertical space */
+    box-sizing: border-box;
 }
 
 .digitButton {
@@ -59,4 +65,18 @@ td {
 
 .ACButton:hover {
     background-color: #00cccc;
+}
+
+.pressed {
+    background-color: #ffcc00 !important;
+    box-shadow: 0 0 10px #ffcc00;
+}
+
+#history {
+     padding: 10px;
+    min-height: 40px;     /* Creates space for history text */
+    text-align: right;
+    font-size: 0.8em;
+    color: #eee;
+    box-sizing: border-box;
 }

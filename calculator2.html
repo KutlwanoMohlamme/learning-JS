@@ -1,9 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="calculator.css">
+    <link rel="stylesheet" type="text/css" href="styles/calculator.css">
+    <title>Animated Calculator</title>
 </head>
 <body>
-    <table border="1">
+    <table> 
+        <table border="1">
         <tr>
             <td colspan="4">
                 <input type="text" id="inputBox" value="0"/>
@@ -11,7 +14,7 @@
         </tr>
         <tr>
             <td colspan="4">
-                <div id="history"></div> <!-- History Display -->
+                <div id="history"></div>
             </td>
         </tr>
         <tr>
@@ -21,26 +24,26 @@
             <td class="operatorButton" onclick="operatorBtnPressed('/')">/</td>
         </tr>
         <tr>
-            <td class="digitButton" onclick="digitBtnPressed(7)">7</td>
-            <td class="digitButton" onclick="digitBtnPressed(8)">8</td>
-            <td class="digitButton" onclick="digitBtnPressed(9)">9</td>
+            <td class="digitButton" onclick="digitBtnPressed(7, event)">7</td>
+            <td class="digitButton" onclick="digitBtnPressed(8, event)">8</td>
+            <td class="digitButton" onclick="digitBtnPressed(9, event)">9</td>
             <td class="operatorButton" onclick="operatorBtnPressed('x')">x</td>
         </tr>
         <tr>
-            <td class="digitButton" onclick="digitBtnPressed(4)">4</td>
-            <td class="digitButton" onclick="digitBtnPressed(5)">5</td>
-            <td class="digitButton" onclick="digitBtnPressed(6)">6</td>
+            <td class="digitButton" onclick="digitBtnPressed(4, event)">4</td>
+            <td class="digitButton" onclick="digitBtnPressed(5, event)">5</td>
+            <td class="digitButton" onclick="digitBtnPressed(6, event)">6</td>
             <td class="operatorButton" onclick="operatorBtnPressed('-')">-</td>
         </tr>
         <tr>
-            <td class="digitButton" onclick="digitBtnPressed(1)">1</td>
-            <td class="digitButton" onclick="digitBtnPressed(2)">2</td>
-            <td class="digitButton" onclick="digitBtnPressed(3)">3</td>
+            <td class="digitButton" onclick="digitBtnPressed(1, event)">1</td>
+            <td class="digitButton" onclick="digitBtnPressed(2, event)">2</td>
+            <td class="digitButton" onclick="digitBtnPressed(3, event)">3</td>
             <td class="operatorButton" onclick="operatorBtnPressed('+')">+</td>
         </tr>
         <tr>
-            <td class="digitButton" colspan="2" onclick="digitBtnPressed(0)">0</td>
-            <td class="operatorButton" onclick="digitBtnPressed('.')">.</td>
+            <td class="digitButton" colspan="2" onclick="digitBtnPressed(0, event)">0</td>
+            <td class="digitButton" onclick="digitBtnPressed('.', event)">.</td>
             <td class="ACButton" onclick="btnACPressed()">AC</td>
         </tr>
         <tr>
@@ -52,29 +55,61 @@
     </table>
 
     <script>
-        var newLine = true;
-        var value1;
-        var currentOperator;
-        var memory = 0;
+        let newLine = true;
+        let value1;
+        let currentOperator;
+        let memory = 0;
 
-        function digitBtnPressed(button){
+        function digitBtnPressed(button, event){
+            const inputBox = document.getElementById("inputBox");
             if(newLine){
-                document.getElementById("inputBox").value = button;
+                inputBox.value = button;
                 newLine = false;
             } else {
-                var currentValue = document.getElementById("inputBox").value;
-                document.getElementById("inputBox").value = currentValue + button;
+                inputBox.value += button;
             }
+
+            // Press animation
+            const btn = event.currentTarget;
+            btn.classList.add("pressed");
+            setTimeout(() => btn.classList.remove("pressed"), 150);
+        }
+
+        function operatorBtnPressed(operator){
+            currentOperator = operator;
+            value1 = parseFloat(document.getElementById("inputBox").value);
+            newLine = true;
+        }
+
+        function equalsBtnPressed(){
+            const value2 = parseFloat(document.getElementById("inputBox").value);
+            let result;
+
+            switch(currentOperator){
+                case "+": result = value1 + value2; break;
+                case "-": result = value1 - value2; break;
+                case "/": result = value1 / value2; break;
+                case "x": result = value1 * value2; break;
+                case "%": result = value1 * (value2 / 100); break;
+                case "^": result = Math.pow(value1, value2); break;
+                case "√": result = Math.sqrt(value1); break;
+            }
+
+            const inputBox = document.getElementById("inputBox");
+            inputBox.value = result;
+            document.getElementById("history").innerHTML += `<p>${value1} ${currentOperator} ${value2} = ${result}</p>`;
+            value1 = 0;
+            newLine = true;
         }
 
         function btnACPressed(){
             document.getElementById("inputBox").value = 0;
-            document.getElementById("history").innerHTML = ""; // Clear history
+            document.getElementById("history").innerHTML = "";
             newLine = true;
         }
 
         function backspacePressed() {
-            var input = document.getElementById("inputBox").value;
+            const input = document.getElementById("inputBox").value;
             document.getElementById("inputBox").value = input.slice(0, -1) || "0";
         }
 
@@ -85,50 +120,10 @@
         function memoryRecall() {
             document.getElementById("inputBox").value = memory;
         }
-
-        function operatorBtnPressed(operator){
-            currentOperator = operator;
-            value1 = parseFloat(document.getElementById("inputBox").value);
-            newLine = true;
-        }
-
-        function equalsBtnPressed(){
-            var value2 = parseFloat(document.getElementById("inputBox").value);
-            var finalTotal;
-
-            switch(currentOperator){
-                case "+":
-                    finalTotal = value1 + value2;
-                    break;
-                case "-":
-                    finalTotal = value1 - value2;
-                    break;
-                case "/":
-                    finalTotal = value1 / value2;
-                    break;
-                case "x":
-                    finalTotal = value1 * value2;
-                    break;
-                case "%":
-                    finalTotal = value1 * (value2 / 100); // Percentage Calculation
-                    break;
-                case "^":
-                    finalTotal = Math.pow(value1, value2); // Exponentiation
-                    break;
-                case "√":
-                    finalTotal = Math.sqrt(value1); // Square Root
-                    break;
-            }
-
-            document.getElementById("inputBox").value = finalTotal;
-            document.getElementById("history").innerHTML += `<p>${value1} ${currentOperator} ${value2} = ${finalTotal}</p>`;
-
-            value1 = 0;
-            newLine = true;
-        }
     </script>
 </body>
 </html>
+
 
 
 
